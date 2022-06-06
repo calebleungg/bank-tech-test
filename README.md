@@ -21,7 +21,7 @@ All tests reside inside the `spec` folder.
 
 The example scenario test case is inside `spec/examples/alice_spec.rb`
 
-To run the tests, either commands,
+To run the tests, use either commands:
 ```bash
 # runs tests at the specified location
 $: rspec spec/examples/alice_spec.rb
@@ -36,7 +36,7 @@ $: rspec
 
 Two paths I thought could be taken with storing the balance values.
 
-If we assume an app required persistence, a benefit of having a field on a table model is immediate accessibility. The downsides would be the manual requirement of updating the balance where necessary. This could cause maintainability or even inaccuracy issues.
+If we assumed an app required persistence, a benefit of having a static field on a table model is immediate accessibility and the performance issues it avoids. The downsides would be the manual requirement of updating the balance where necessary. This could cause maintainability or even inaccuracy issues.
 
 For the exercise, this requirement did not exist, so a simple instance variable on a class seemed adequate. In a real-world application, to me I believe it worthwhile to endeavour a way to have the balance derived. A static value doesn't feel right.
 
@@ -59,7 +59,7 @@ It also did not make sense to me, to globaly expose the `balance` instance varia
 
 A transaction model seemed a necessary abstraction for maintainability. I then thought it useful to separate out logic required for a `Deposit` vs a `Withdrawal` through inheritance.
 
-From the requirements, there is a difference between the two around validating balances. The two classes provide a way for us to deal with these separate concerns in a clear way.
+From the requirements, there is a difference between the two around validating balances. 
 
 Both classes provide an explicit place for code to live, depending on what type of transaction it may be.
 <br>
@@ -71,6 +71,8 @@ There could have been a broader piece done around updating balances for both the
 
 Again this results from the decision around storing static balance values in the class.
 
-An of how I've tried to address this can be seen inside the `Withdrawal` class, in where it validates all aspects needed for a successful transaction, before performing the transaction steps.
+An example of how I've tried to address this can be seen inside the `Withdrawal` class, in where it validates all aspects needed for a successful transaction, before performing the transaction steps.
+
+If we assume an app has persistence, then we can check model validness for our intended post-transaction state, before persisting the changes. This would be much more air-tight vs validations thought up by a developer that is bound to miss the edgest of edge cases.
 <br>
 <br>
