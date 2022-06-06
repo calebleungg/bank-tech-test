@@ -51,7 +51,7 @@ Ruby has a nice way of doing this with `modules` and `concerns`. The ability to 
 
 The module itself is compact and only deals with what it needs to- updating a balance. Modules provide a maintainable way to manage shared code across the codebase.
 
-It also did not make sense to me, to globaly expose the `balance` instance variable with an `attr_accessor`. It just seemed a tad barbaric and unsafe. Having explicit update methods indicates a need for developers to decide where and when to update balances.
+It also did not make sense to me, to globaly expose the `balance` instance variable with an `attr_accessor`. Having explicit update methods indicates a need for developers to decide where and when to interact with balances.
 <br>
 <br>
 
