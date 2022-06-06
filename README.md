@@ -2,7 +2,7 @@
 
 A simple bank application that supports withdrawals, deposits, and balances.
 
-# Installation
+## Installation
 
 1. Install ruby version `3.1.2` ([A guide on how](https://www.ruby-lang.org/en/documentation/installation/))
 2. Install dependencies by first installing bundler, then installing the packages. (There is only one dependency, `rspec`)
@@ -14,7 +14,7 @@ $: gem install bundler
 $: bundle install
 ```
 
-# How To Run
+## How To Run
 All tests reside inside the `spec` folder.
 
 `rspec` was used as the testing framework.
@@ -30,9 +30,9 @@ $: rspec spec/examples/alice_spec.rb
 $: rspec
 ```
 
-# Retrospective
+## Retrospective
 
-## Balance State - Static vs Derived
+### Balance State - Static vs Derived
 
 Two paths I thought could be taken with storing the balance values.
 
@@ -44,7 +44,7 @@ Not immediately sure how practical that would be for say a bank-wide total balan
 <br>
 <br>
 
-## Modules - Balanceable
+### Modules - Balanceable
 The `User` and `Bank` class ended up having some shared code domain around balanace updates. The aim of `Balanceable` was to abstract this into it's own shareable module.
 
 Ruby has a nice way of doing this with `modules` and `concerns`. The ability to unit test these modules is a positive.
@@ -55,12 +55,22 @@ It also did not make sense to me, to globaly expose the `balance` instance varia
 <br>
 <br>
 
-## Transaction Siblings
+### Transaction Siblings
 
 A transaction model seemed a necessary abstraction for maintainability. I then thought it useful to separate out logic required for a `Deposit` vs a `Withdrawal` through inheritance.
 
 From the requirements, there is a difference between the two around validating balances. The two classes provide a way for us to deal with these separate concerns in a clear way.
 
 Both classes provide an explicit place for code to live, depending on what type of transaction it may be.
+<br>
+<br>
+
+### One cannot happen without the other
+
+There could have been a broader piece done around updating balances for both the `User` and the `Bank` in a failsale transaction, where if one failed, the other would abort.
+
+Again this results from the decision around storing static balance values in the class.
+
+An of how I've tried to address this can be seen inside the `Withdrawal` class, in where it validates all aspects needed for a successful transaction, before performing the transaction steps.
 <br>
 <br>
