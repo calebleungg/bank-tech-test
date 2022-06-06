@@ -36,7 +36,7 @@ $: rspec
 
 Two paths I thought could be taken with storing the balance values.
 
-If we assumed an app required persistence, a benefit of having a static field on a table model is immediate accessibility and the performance issues it avoids. The downsides would be the manual requirement of updating the balance where necessary. This could cause maintainability or even inaccuracy issues.
+If we assumed an app required persistence, a benefit of having a static field on a table model is immediate accessibility and the performance issues it avoids. The downsides would be the manual requirement of updating the balance where necessary, and issues around maintainability / inaccuracies from denormalization.
 
 For the exercise, this requirement did not exist, so a simple instance variable on a class seemed adequate. In a real-world application, to me I believe it worthwhile to endeavour a way to have the balance derived. A static value doesn't feel right.
 
@@ -49,9 +49,9 @@ The `User` and `Bank` class ended up having some shared code domain around balan
 
 Ruby has a nice way of doing this with `modules` and `concerns`. The ability to unit test these modules is a positive.
 
-The module itself is compact and only deals with what it needs to- updating a balance. Modules provide a maintainable way to manage shared code across the codebase.
+The module itself is compact and only deals with what it needs to- updating a balance.
 
-It also did not make sense to me, to globaly expose the `balance` instance variable with an `attr_accessor`. Having explicit update methods indicates a need for developers to decide where and when to interact with balances.
+I chose to not globaly expose the `balance` instance variable with an `attr_accessor`. Having explicit update methods indicates a need for developers to decide where and when to interact with balances.
 <br>
 <br>
 
