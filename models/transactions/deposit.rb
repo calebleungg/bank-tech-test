@@ -1,12 +1,11 @@
 require "./models/transactions/base"
 
 class Deposit < Transaction::Base
-  def initialize(user, amount)
-    super(user, amount)
+  def initialize(account, amount)
+    super(account, amount)
   end
 
   def perform
-    @user.add_balance(@amount)
-    @bank.add_balance(@amount)
+    @account.add_balance(@amount)
   end
 end

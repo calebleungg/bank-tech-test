@@ -1,15 +1,14 @@
 require "./models/transactions/base"
 
 class Withdrawal < Transaction::Base
-  def initialize(user, amount)
-    super(user, amount)
+  def initialize(account, amount)
+    super(account, amount)
   end
 
   def perform
     return unless user_has_funds?
 
-    @user.subtract_balance(@amount)
-    @bank.subtract_balance(@amount)
+    @account.subtract_balance(@amount)
   end
 
   private

@@ -1,11 +1,10 @@
 module Transaction
   class Base
-    attr_reader :bank, :user, :amount
+    attr_reader :amount, :account
 
-    def initialize(user, amount)
-      @user = user
+    def initialize(account, amount)
+      @account = account
       @amount = amount
-      @bank = user.bank
     end
   end
 end
