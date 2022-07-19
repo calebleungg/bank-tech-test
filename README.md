@@ -1,4 +1,4 @@
-# Afterpay Coding Exercise Submission
+# Coding Exercise Submission
 
 A simple bank application that supports withdrawals, deposits, and balances.
 
